@@ -119,6 +119,7 @@ interface GraphQLRelease {
   url: string;
   description: string;
   isDraft: boolean;
+  databaseId: number;
 }
 
 interface CommitHistory {
@@ -171,6 +172,7 @@ export interface GitHubRelease {
   url: string;
   draft?: boolean;
   uploadUrl?: string;
+  id: number;
 }
 
 export interface GitHubTag {
@@ -840,6 +842,7 @@ export class GitHub {
             notes: release.description,
             url: release.url,
             draft: release.isDraft,
+            id: release.databaseId,
           } as GitHubRelease;
         }),
     } as ReleaseHistory;
@@ -1310,6 +1313,7 @@ export class GitHub {
         url: resp.data.html_url,
         draft: resp.data.draft,
         uploadUrl: resp.data.upload_url,
+        id: resp.data.id,
       };
     },
     e => {

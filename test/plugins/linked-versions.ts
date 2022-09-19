@@ -61,16 +61,19 @@ describe('LinkedVersions plugin', () => {
         sha: 'abc123',
         tagName: 'pkg1-v1.0.0',
         url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+        id: 4250,
       },
       {
         sha: 'def234',
         tagName: 'pkg2-v0.2.3',
         url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v0.2.3',
+        id: 4251,
       },
       {
         sha: 'def234',
         tagName: 'pkg3-v0.2.3',
         url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg3-v0.2.3',
+        id: 4252,
       },
     ]);
     mockCommits(sandbox, github, [

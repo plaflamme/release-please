@@ -97,10 +97,11 @@ function mockCreateRelease(
     draft?: boolean;
     prerelease?: boolean;
     duplicate?: boolean;
+    id: number;
   }[]
 ): sinon.SinonStub {
   const releaseStub = sandbox.stub(github, 'createRelease');
-  for (const {sha, tagName, draft, duplicate} of releases) {
+  for (const {sha, tagName, draft, duplicate, id} of releases) {
     const stub = releaseStub.withArgs(
       sinon.match.has(
         'tag',
@@ -133,6 +134,7 @@ function mockCreateRelease(
         url: 'https://path/to/release',
         notes: 'some release notes',
         draft,
+        id,
       });
     }
   }
@@ -802,6 +804,7 @@ describe('Manifest', () => {
           tagName: 'v1.2.3',
           sha: 'abc123',
           url: 'http://path/to/release',
+          id: 4250,
         },
       ]);
 
@@ -836,6 +839,7 @@ describe('Manifest', () => {
           tagName: 'v1.2.3',
           sha: 'abc123',
           url: 'http://path/to/release',
+          id: 4250,
         },
       ]);
 
@@ -873,6 +877,7 @@ describe('Manifest', () => {
           tagName: 'v1.2.3',
           sha: 'abc123',
           url: 'http://path/to/release',
+          id: 4250,
         },
       ]);
 
@@ -908,6 +913,7 @@ describe('Manifest', () => {
           tagName: 'foobar-v1.2.3',
           sha: 'abc123',
           url: 'http://path/to/release',
+          id: 4250,
         },
       ]);
 
@@ -943,6 +949,7 @@ describe('Manifest', () => {
           tagName: 'other-v3.3.3',
           sha: 'abc123',
           url: 'http://path/to/release',
+          id: 4250,
         },
       ]);
 
@@ -1025,6 +1032,7 @@ describe('Manifest', () => {
           tagName: 'other-v3.3.3',
           sha: 'def234',
           url: 'http://path/to/release',
+          id: 4250,
         },
       ]);
       mockTags(sandbox, github, []);
@@ -1076,11 +1084,13 @@ describe('Manifest', () => {
           tagName: 'other-v3.3.3',
           sha: 'abc123',
           url: 'http://path/to/release',
+          id: 4250,
         },
         {
           tagName: 'other-v3.3.2',
           sha: 'def234',
           url: 'http://path/to/release',
+          id: 4251,
         },
       ]);
 
@@ -1191,11 +1201,13 @@ describe('Manifest', () => {
           tagName: 'v3.3.2',
           sha: 'def234',
           url: 'http://path/to/release',
+          id: 4250,
         },
         {
           tagName: 'v3.3.1',
           sha: 'ghi345',
           url: 'http://path/to/release',
+          id: 4251,
         },
       ]);
       mockTags(sandbox, github, []);
@@ -1236,6 +1248,7 @@ describe('Manifest', () => {
           tagName: 'v1.2.3',
           sha: 'abc123',
           url: 'http://path/to/release',
+          id: 4250,
         },
       ]);
 
@@ -1321,6 +1334,7 @@ describe('Manifest', () => {
           tagName: 'v3.3.1',
           sha: 'ghi345',
           url: 'http://path/to/release',
+          id: 4250,
         },
       ]);
       mockTags(sandbox, github, []);
@@ -1381,6 +1395,7 @@ describe('Manifest', () => {
             sha: 'abc123',
             tagName: 'v1.0.0',
             url: 'https://github.com/fake-owner/fake-repo/releases/tag/v1.0.0',
+            id: 4250,
           },
         ]);
         mockCommits(sandbox, github, [
@@ -1576,6 +1591,7 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'pkg1-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+          id: 4250,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -1639,11 +1655,13 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'pkg1-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+          id: 4250,
         },
         {
           sha: 'def234',
           tagName: 'pkg2-v0.2.3',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v0.2.3',
+          id: 4251,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -1723,11 +1741,13 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'pkg1-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+          id: 4250,
         },
         {
           sha: 'def234',
           tagName: 'pkg2-v0.2.3',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v1.0.0',
+          id: 4251,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -1810,11 +1830,13 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'pkg1-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+          id: 4250,
         },
         {
           sha: 'def234',
           tagName: 'pkg2-v0.2.3',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v1.0.0',
+          id: 4251,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -1901,11 +1923,13 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'pkg1-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+          id: 4250,
         },
         {
           sha: 'def234',
           tagName: 'pkg2-v0.2.3',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v1.0.0',
+          id: 4251,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -2047,11 +2071,13 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'pkg1-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+          id: 4250,
         },
         {
           sha: 'def234',
           tagName: 'pkg2-v0.2.3',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v1.0.0',
+          id: 4251,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -2138,26 +2164,31 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'pkg1-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+          id: 4250,
         },
         {
           sha: 'abc123',
           tagName: 'root-v1.2.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/root-v1.2.0',
+          id: 4251,
         },
         {
           sha: 'def234',
           tagName: 'pkg1-v1.0.1',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.1',
+          id: 4252,
         },
         {
           sha: 'def234',
           tagName: 'pkg2-v0.2.3',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v0.2.3',
+          id: 4253,
         },
         {
           sha: 'def234',
           tagName: 'root-v1.2.1',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/root-v1.2.1',
+          id: 4254,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -2249,16 +2280,19 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'pkg1-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+          id: 4250,
         },
         {
           sha: 'def234',
           tagName: 'pkg1-v1.0.1',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.1',
+          id: 4251,
         },
         {
           sha: 'def234',
           tagName: 'pkg2-v0.2.3',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v0.2.3',
+          id: 4252,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -2388,6 +2422,7 @@ describe('Manifest', () => {
           tagName: 'v1.2.3',
           sha: 'def234',
           url: 'http://path/to/release',
+          id: 4251,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -2436,6 +2471,7 @@ describe('Manifest', () => {
             sha: 'abc123',
             tagName: 'v1.0.0',
             url: 'https://github.com/fake-owner/fake-repo/releases/tag/v1.0.0',
+            id: 4250,
           },
         ]);
         mockCommits(sandbox, github, []);
@@ -2565,6 +2601,7 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/v1.0.0',
+          id: 4250,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -2627,11 +2664,13 @@ describe('Manifest', () => {
             sha: 'abc123',
             tagName: 'pkg1-v1.0.0',
             url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg1-v1.0.0',
+            id: 4250,
           },
           {
             sha: 'def234',
             tagName: 'pkg2-v0.2.3',
             url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v1.0.0',
+            id: 4251,
           },
         ]);
         mockCommits(sandbox, github, [
@@ -2867,11 +2906,13 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/v1.0.0',
+          id: 4250,
         },
         {
           sha: 'def234',
           tagName: 'pkg2-v0.2.3',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkg2-v0.2.3',
+          id: 4251,
         },
       ]);
       mockCommits(sandbox, github, [
@@ -4900,7 +4941,7 @@ describe('Manifest', () => {
           )
         );
       mockCreateRelease(github, [
-        {sha: 'abc123', tagName: 'release-brancher-v1.3.1'},
+        {sha: 'abc123', tagName: 'release-brancher-v1.3.1', id: 4250},
       ]);
       const commentStub = sandbox.stub(github, 'commentOnIssue').resolves();
       const addLabelsStub = sandbox.stub(github, 'addIssueLabels').resolves();
@@ -4991,10 +5032,10 @@ describe('Manifest', () => {
         );
 
       mockCreateRelease(github, [
-        {sha: 'abc123', tagName: 'bot-config-utils-v3.2.0'},
-        {sha: 'abc123', tagName: 'label-utils-v1.1.0'},
-        {sha: 'abc123', tagName: 'object-selector-v1.1.0'},
-        {sha: 'abc123', tagName: 'datastore-lock-v2.1.0'},
+        {sha: 'abc123', tagName: 'bot-config-utils-v3.2.0', id: 4250},
+        {sha: 'abc123', tagName: 'label-utils-v1.1.0', id: 4251},
+        {sha: 'abc123', tagName: 'object-selector-v1.1.0', id: 4252},
+        {sha: 'abc123', tagName: 'datastore-lock-v2.1.0', id: 4253},
       ]);
       const commentStub = sandbox.stub(github, 'commentOnIssue').resolves();
       const addLabelsStub = sandbox.stub(github, 'addIssueLabels').resolves();
@@ -5089,7 +5130,7 @@ describe('Manifest', () => {
           '.': Version.parse('3.2.6'),
         }
       );
-      mockCreateRelease(github, [{sha: 'abc123', tagName: 'v3.2.7'}]);
+      mockCreateRelease(github, [{sha: 'abc123', tagName: 'v3.2.7', id: 4250}]);
       const commentStub = sandbox.stub(github, 'commentOnIssue').resolves();
       const releases = await manifest.createReleases();
       expect(releases).lengthOf(1);
@@ -5139,7 +5180,7 @@ describe('Manifest', () => {
           )
         );
       mockCreateRelease(github, [
-        {sha: 'abc123', tagName: 'release-brancher-v1.3.1'},
+        {sha: 'abc123', tagName: 'release-brancher-v1.3.1', id: 4250},
       ]);
       const commentStub = sandbox.stub(github, 'commentOnIssue').resolves();
       const addLabelsStub = sandbox.stub(github, 'addIssueLabels').resolves();
@@ -5209,7 +5250,12 @@ describe('Manifest', () => {
           )
         );
       const githubReleaseStub = mockCreateRelease(github, [
-        {sha: 'abc123', tagName: 'release-brancher-v1.3.1', draft: true},
+        {
+          sha: 'abc123',
+          tagName: 'release-brancher-v1.3.1',
+          draft: true,
+          id: 4250,
+        },
       ]);
       const commentStub = sandbox.stub(github, 'commentOnIssue').resolves();
       const addLabelsStub = sandbox.stub(github, 'addIssueLabels').resolves();
@@ -5287,6 +5333,7 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'release-brancher-v1.3.1-beta1',
           prerelease: true,
+          id: 4250,
         },
       ]);
       const commentStub = sandbox.stub(github, 'commentOnIssue').resolves();
@@ -5363,6 +5410,7 @@ describe('Manifest', () => {
           sha: 'abc123',
           tagName: 'release-brancher-v1.3.1',
           prerelease: false,
+          id: 4250,
         },
       ]);
       const commentStub = sandbox.stub(github, 'commentOnIssue').resolves();
@@ -5459,10 +5507,15 @@ describe('Manifest', () => {
         );
 
       mockCreateRelease(github, [
-        {sha: 'abc123', tagName: 'bot-config-utils-v3.2.0', duplicate: true},
-        {sha: 'abc123', tagName: 'label-utils-v1.1.0'},
-        {sha: 'abc123', tagName: 'object-selector-v1.1.0'},
-        {sha: 'abc123', tagName: 'datastore-lock-v2.1.0'},
+        {
+          sha: 'abc123',
+          tagName: 'bot-config-utils-v3.2.0',
+          duplicate: true,
+          id: 4250,
+        },
+        {sha: 'abc123', tagName: 'label-utils-v1.1.0', id: 4251},
+        {sha: 'abc123', tagName: 'object-selector-v1.1.0', id: 4252},
+        {sha: 'abc123', tagName: 'datastore-lock-v2.1.0', id: 4253},
       ]);
       const commentStub = sandbox.stub(github, 'commentOnIssue').resolves();
       const addLabelsStub = sandbox.stub(github, 'addIssueLabels').resolves();
@@ -5573,10 +5626,30 @@ describe('Manifest', () => {
         );
 
       mockCreateRelease(github, [
-        {sha: 'abc123', tagName: 'bot-config-utils-v3.2.0', duplicate: true},
-        {sha: 'abc123', tagName: 'label-utils-v1.1.0', duplicate: true},
-        {sha: 'abc123', tagName: 'object-selector-v1.1.0', duplicate: true},
-        {sha: 'abc123', tagName: 'datastore-lock-v2.1.0', duplicate: true},
+        {
+          sha: 'abc123',
+          tagName: 'bot-config-utils-v3.2.0',
+          duplicate: true,
+          id: 4250,
+        },
+        {
+          sha: 'abc123',
+          tagName: 'label-utils-v1.1.0',
+          duplicate: true,
+          id: 4251,
+        },
+        {
+          sha: 'abc123',
+          tagName: 'object-selector-v1.1.0',
+          duplicate: true,
+          id: 4252,
+        },
+        {
+          sha: 'abc123',
+          tagName: 'datastore-lock-v2.1.0',
+          duplicate: true,
+          id: 4253,
+        },
       ]);
       const commentStub = sandbox.stub(github, 'commentOnIssue').resolves();
       const addLabelsStub = sandbox.stub(github, 'addIssueLabels').resolves();

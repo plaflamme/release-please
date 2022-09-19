@@ -77,11 +77,13 @@ describe('Plugin compatibility', () => {
           sha: 'abc123',
           tagName: 'pkgA-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkgA-v1.0.0',
+          id: 4250,
         },
         {
           sha: 'abc123',
           tagName: 'pkgB-v1.0.0',
           url: 'https://github.com/fake-owner/fake-repo/releases/tag/pkgB-v1.0.0',
+          id: 4251,
         },
       ]);
       mockCommits(sandbox, github, [
